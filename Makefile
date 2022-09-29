@@ -32,8 +32,9 @@ OPATH			:=	obj
 UTPATH			:=	unit_test
 
 SRCS_PATH		:=	sources
-CB_MLX_PATH		:=	cb_mlx
 GRAPH_PATH		:=	graphics
+CAM_PATH		:=	camera_movements
+TEX_PATH		:=	texturing
 MAP_PATH		:=	map
 PARSE_PATH		:=	parsing
 RAY_PATH		:=	ray_casting
@@ -43,96 +44,116 @@ UTILS_PATH		:=	utils
 AR				:=	ar rcs
 RM				:=	rm -rf
 
-CB_MLX_SRCS		:=	cb_mlx_init.c\
-				cb_mlx_show.c
-
 GRAPH_SRCS		:=	choose_wall_color.c\
-					destroy_sprites.c\
 					draw_vertical_line.c\
-					free_mlx.c\
-					ft_key_hook.c\
+					key_hook.c\
 					ft_red_cross.c\
 					init_game.c\
 					my_mlx_pixel_put.c\
 
+CAM_SRCS		:=	move_down.c\
+					move_left.c\
+					move_right.c\
+					move_up.c\
+					rotate_left.c\
+					rotate_right.c\
+
+TEX_SRCS		:=	init_buf.c\
+					init_texture.c\
+					generate_textures.c\
+					choose_wall_texture.c\
+					init_re_buf.c\
+					load_texture.c\
+
 MAP_SRCS		:=	map.c\
-				map_check.c\
-				map_check_line.c\
-				map_check_line_char.c\
-				map_check_line_player_sp.c\
-				map_check_width.c\
-				map_get_start_obj.c\
-				map_rm_nl.c\
-				map_rm_nl_line.c\
-				map_tab.c\
-				map_tab_create.c\
-				map_tab_create_line.c\
-				map_tab_free.c\
-				map_tab_init_bzero.c\
-				map_tab_init.c\
-				map_tab_init_line.c\
-				map_tab_show.c
+					map_check.c\
+					map_check_line.c\
+					map_check_line_char.c\
+					map_check_line_player_sp.c\
+					map_check_width.c\
+					map_get_start_obj.c\
+					map_rm_nl.c\
+					map_rm_nl_line.c\
+					map_tab.c\
+					map_tab_adjust.c\
+					map_tab_adjust_line.c\
+					map_tab_check.c\
+					map_tab_check_line.c\
+					map_tab_check_line_horizontal.c\
+					map_tab_check_line_vertical.c\
+					map_tab_create.c\
+					map_tab_create_line.c\
+					map_tab_free.c\
+					map_tab_init_bzero.c\
+					map_tab_init.c\
+					map_tab_init_line.c\
+					map_tab_show.c
 
 PARSE_SRCS		:=	parse_argc.c\
-				parse.c\
-				parse_map_fd.c\
-				parse_map_fd_free.c\
-				parse_map_fd_init.c\
-				parse_map_fd_show.c\
-				parse_map_lst.c\
-				parse_map_lst_check.c\
-				parse_map_lst_fullspace.c\
-				parse_map_lst_get_value.c\
-				parse_map_lst_line.c\
-				parse_map_lst_line_txt_type.c\
-				parse_read_file.c\
-				create_list.c\
+					parse.c\
+					parse_map_fd.c\
+					parse_map_fd_free.c\
+					parse_map_fd_init.c\
+					parse_map_fd_show.c\
+					parse_map_lst.c\
+					parse_map_lst_check.c\
+					parse_map_lst_fullspace.c\
+					parse_map_lst_get_value.c\
+					parse_map_lst_line.c\
+					parse_map_lst_line_txt_type.c\
+					parse_read_file.c\
+					create_list.c\
 					ft_parse.c\
 					read_map.c\
 
 RAY_SRCS		:=	calculate_ray_position_and_direction.c\
 					calculate_step.c\
-					draw_wall.c\
+					calculate_start_and_end_of_line.c\
 					perform_dda.c\
-					set_vectors.c\
+					init_struct.c\
 					start_ray_casting_loop.c\
 
 SETTINGS_SRCS		:=	settings_check.c\
-				settings_check_map_order.c\
-				settings_check_map_start_line.c\
-				settings_check_map_size_min.c\
-				settings_check_txt_type.c\
-				settings_free.c\
-				settings_free_close_fd.c\
-				settings_init.c\
-				settings_init_map.c\
-				settings_rgb.c\
-				settings_rgb_check.c\
-				settings_rgb_check_char.c\
-				settings_rgb_check_dup.c\
-				settings_rgb_check_space.c\
-				settings_rgb_check_value.c\
-				settings_rgb_rm_space_end.c\
-				settings_rgb_set_line_no.c\
-				settings_rgb_set_value.c\
-				settings_rgb_set_value_type.c\
-				settings_rm_space_end.c\
-				settings_show.c\
-				settings_show_string.c\
-				settings_texture_fd_check_dup.c\
-				settings_texture_fd_open.c\
-				settings_texture_fd_save.c\
-				settings_texture_fd_set_line_no.c
+						settings_check_map_order.c\
+						settings_check_map_start_line.c\
+						settings_check_map_size_min.c\
+						settings_check_txt_type.c\
+						settings_free.c\
+						settings_free_close_fd.c\
+						settings_init.c\
+						settings_init_map.c\
+						settings_rgb.c\
+						settings_rgb_check.c\
+						settings_rgb_check_char.c\
+						settings_rgb_check_dup.c\
+						settings_rgb_check_space.c\
+						settings_rgb_check_value.c\
+						settings_rgb_rm_space_end.c\
+						settings_rgb_set_line_no.c\
+						settings_rgb_set_value.c\
+						settings_rgb_set_value_type.c\
+						settings_rm_space_end.c\
+						settings_show.c\
+						settings_show_string.c\
+						settings_texture_fd_check_dup.c\
+						settings_texture_fd_open.c\
+						settings_texture_fd_save_fd.c\
+						settings_texture_fd_save_filename.c\
+						settings_texture_fd_set_line_no.c
 
 UTILS_SRCS		:=	get_character_in_map.c\
 					print_map.c\
+					print_tab.c\
+					errors_handler.c\
+					clean_up.c\
 
 SRCS			:=	main.c\
-					$(CB_MLX_SRCS)\
 					$(GRAPH_SRCS)\
+					$(CAM_SRCS)\
+					$(TEX_SRCS)\
+					$(RAY_SRCS)\
 					$(MAP_SRCS)\
 					$(PARSE_SRCS)\
-					$(RAY_SRCS)\
 					$(SETTINGS_SRCS)\
 					$(UTILS_SRCS)
 					
@@ -141,11 +162,12 @@ DEPS			:=	$(OBJS:.o=.d)
 
 vpath %.h $(IPATH)
 vpath %.c $(SRCS_PATH)\
-		$(SRCS_PATH)/$(CB_MLX_PATH)\
 		$(SRCS_PATH)/$(GRAPH_PATH)\
+		$(SRCS_PATH)/$(GRAPH_PATH)/$(CAM_PATH)\
+		$(SRCS_PATH)/$(GRAPH_PATH)/$(TEX_PATH)\
+		$(SRCS_PATH)/$(RAY_PATH)\
 		$(SRCS_PATH)/$(MAP_PATH)\
 		$(SRCS_PATH)/$(PARSE_PATH)\
-		$(SRCS_PATH)/$(RAY_PATH)\
 		$(SRCS_PATH)/$(SETTINGS_PATH)\
 		$(SRCS_PATH)/$(UTILS_PATH)
 

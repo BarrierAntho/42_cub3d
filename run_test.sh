@@ -13,7 +13,7 @@ BU='\033[0;34m'
 MG='\033[0;35m'
 NC='\033[0m'
 
-PROGNAME="cub3d"
+PROGNAME="cub3D"
 ORI_P=$(pwd)
 FILE_P=${ORI_P}/maps
 RES_P=${ORI_P}/result
@@ -43,19 +43,39 @@ function	run_manual()
 function	run_maps()
 {
 	local	res_file="${4}_result_maps.txt";
+	local	n_test=0;
+	local	res_ok=0;
+	local	res_ko=0;
 
 	echo -e "${YE}Executing \"${FUNCNAME} - ${4}\"${NC}";
 	for i in ${2}/${4}*
 	do
 		echo -e "${BU}Progress on : ${i}${NC}" | tee -a ${3}/${res_file};
+		((n_test++));
 		if ./${1} ${i} >> ${3}/${res_file} 2>&1; [ $? != 0 ]
 		then
 			echo -e "${RD}Program failed${NC}" | tee -a ${3}/${res_file};
+			((res_ko++))
+			if [ "${4}" == "ko" ]
+			then
+				echo -e "${BK_GN}RESULT: Corrrect${NC}" | tee -a ${3}/${res_file};
+			else
+				echo -e "${BK_RD}RESULT: Wrong${NC}" | tee -a ${3}/${res_file};
+			fi
 		else
 			echo -e "${GN}Program successed${NC}" | tee -a ${3}/${res_file};
+			((res_ok++))
+			if [ "${4}" == "ko" ]
+			then
+				echo -e "${BK_RD}RESULT: Wrong${NC}" | tee -a ${3}/${res_file};
+			else
+				echo -e "${BK_GN}RESULT: Correct${NC}" | tee -a ${3}/${res_file};
+			fi
 		fi;
 		echo -e "${BU}${SEP_SP}${NC}" | tee -a ${3}/${res_file};
 	done
+	echo -e "${BK_GN}Total of ok: ${res_ok}/${n_test}${NC}" | tee -a ${3}/${res_file};
+	echo -e "${BK_RD}Total of ko: ${res_ko}/${n_test}${NC}" | tee -a ${3}/${res_file};
 	echo -e "${YE}${SEP_P}${NC}";
 	return 0
 }

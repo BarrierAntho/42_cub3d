@@ -6,18 +6,21 @@
 /*   By: amarchan <amarchan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:35:13 by amarchan          #+#    #+#             */
-/*   Updated: 2022/09/21 13:35:28 by amarchan         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:23:25 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void rotate_left(t_game *game)
+void	rotate_left(t_game *game)
 {
-	game->oldDirX = game->dirX;
-	game->dirX = game->dirX * cos(ROTSPEED) - game->dirY * sin(ROTSPEED);
-	game->dirY = game->oldDirX * sin(ROTSPEED) + game->dirY * cos(ROTSPEED);
-	game->oldPlaneX = game->planeX;
-	game->planeX = game->planeX * cos(ROTSPEED) - game->planeY * sin(ROTSPEED);
-	game->planeY = game->oldPlaneX * sin(ROTSPEED) + game->planeY * cos(ROTSPEED);
+	game->old_dir_x = game->dir_x;
+	game->dir_x = game->dir_x * cos(ROTSPEED) - game->dir_y * sin(ROTSPEED);
+	game->dir_y = game->old_dir_x * sin(ROTSPEED) + game->dir_y
+		* cos(ROTSPEED);
+	game->old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(ROTSPEED) - game->plane_y
+		* sin(ROTSPEED);
+	game->plane_y = game->old_plane_x * sin(ROTSPEED) + game->plane_y
+		* cos(ROTSPEED);
 }

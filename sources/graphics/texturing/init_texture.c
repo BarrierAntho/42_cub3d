@@ -6,7 +6,7 @@
 /*   By: amarchan <amarchan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 16:50:15 by amarchan          #+#    #+#             */
-/*   Updated: 2022/09/28 15:18:52 by amarchan         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:09:26 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	fill_textures_tab_with_zero(t_game *game)
 	int	j;
 
 	i = 0;
-	while (i < 11)
+	while (i < 4)
 	{
 		j = 0;
 		while (j < TEX_WIDTH * TEX_HEIGHT)
@@ -35,9 +35,10 @@ static int	malloc_lines_for_textures_tab(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < 11)
+	while (i < 4)
 	{
-		game->texture[i] = (int *)malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH));
+		game->texture[i] = (int *)malloc(sizeof(int)
+				* (TEX_HEIGHT * TEX_WIDTH));
 		if (!game->texture[i])
 			return (errors_handler(MALLOC_ERROR, __func__));
 		i++;
@@ -48,9 +49,9 @@ static int	malloc_lines_for_textures_tab(t_game *game)
 int	init_texture(t_game *game)
 {
 	int	err;
-	
+
 	err = 0;
-	game->texture = (int **)malloc(sizeof(int *) * 11);
+	game->texture = (int **)malloc(sizeof(int *) * 4);
 	if (!game->texture)
 		return (errors_handler(MALLOC_ERROR, __func__));
 	err = malloc_lines_for_textures_tab(game);
